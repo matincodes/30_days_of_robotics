@@ -10,7 +10,7 @@ const useIsAuth = () => {
 
   useEffect(() => {
     if (!auth?.user) {
-      router.push("/login");
+      router.push("/signin");
     } else {
       setLoading(false);
     }

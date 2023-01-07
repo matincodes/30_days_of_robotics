@@ -11,6 +11,7 @@ module.exports = {
       },
       colors: {
         teal: "#2CE2C2",
+        lemon: "#DDEB89",
       },
     },
   },
