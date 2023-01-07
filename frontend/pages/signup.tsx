@@ -11,7 +11,7 @@ type userDetails = {
   track?: string;
 };
 
-export default function Login() {
+export default function Singup() {
   const [details, setDetails] = useState<userDetails>();
   const id = useId();
 
@@ -23,18 +23,18 @@ export default function Login() {
   return (
     <>
       <Head>
-        <title>30 Days of Robotics | Login</title>
+        <title>30 Days of Robotics | Sign up</title>
       </Head>
-      <main>
-        <div className="container mx-auto p-2 pt-6 pb-32">
+      <main className="lg:h-screen lg:px-40">
+        <div className="container mx-auto p-2 pt-6 pb-32 lg:py-8 lg:flex lg:gap-40 lg:h-full items-center">
           <Image
             alt="logo"
             src="/full-logo.png"
             width={436}
             height={200}
-            className="w-[192px] mx-auto mb-8"
+            className="w-[192px] mx-auto mb-8 grow lg:w-1/5 lg:mw-[436px] object-contain"
           />
-          <div>
+          <div className="grow">
             <h1 className="text-teal text-2xl font-semibold mb-2">
               Create an Account
             </h1>

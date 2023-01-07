@@ -4,6 +4,7 @@ import useIsAuth from "../utils/hooks/useIsAuth";
 
 export default function Home() {
   const [loading, FullLoadingSpinner] = useIsAuth();
+
   if (loading) return FullLoadingSpinner;
 
   return (
