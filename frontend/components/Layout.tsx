@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import {
   MouseEvent,
   MouseEventHandler,
@@ -85,7 +86,7 @@ const Header = ({
         <span className="hidden lg:block mr-6 text-base font-medium">
           {auth?.user?.firstName}
         </span>
-        <Link href="/notifications" className="hidden lg:block">
+        <Link href="/message" className="hidden lg:block">
           <Image
             alt="notifications"
             src="/notification.png"
@@ -106,6 +107,13 @@ const Sidebar = ({
   closeSidebar: MouseEventHandler<HTMLDivElement>;
 }) => {
   const auth = useAuth();
+  const { pathname } = useRouter();
+
+  const activeLink = (pathname.match(/^\/[a-z]+/i) ?? ["/home"])[0]
+    .slice(1)
+    .toLocaleLowerCase();
+
+  console.log("activeLink", activeLink);
 
   return (
     <>
@@ -131,7 +139,9 @@ const Sidebar = ({
             <li className="border-b border-b-[#D9D9D9]">
               <Link
                 href="/"
-                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+                className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
+                  activeLink === "home" ? "text-teal" : ""
+                }`}
               >
                 <HomeIcon className="fill-current" />
                 <span>Home</span>
@@ -140,7 +150,9 @@ const Sidebar = ({
             <li className="border-b border-b-[#D9D9D9]">
               <Link
                 href="/leaderboard"
-                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+                className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
+                  activeLink === "leaderboard" ? "text-teal" : ""
+                }`}
               >
                 <LeaderBoardIcon className="fill-current" />
                 <span>Leaderboard</span>
@@ -149,7 +161,9 @@ const Sidebar = ({
             <li className="border-b border-b-[#D9D9D9]">
               <Link
                 href="/submissions"
-                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+                className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
+                  activeLink === "submissions" ? "text-teal" : ""
+                }`}
               >
                 <SubmissionsIcon className="fill-current" />
                 <span>Submissions</span>
@@ -158,7 +172,9 @@ const Sidebar = ({
             <li className="border-b border-b-[#D9D9D9]">
               <Link
                 href="/tasks"
-                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+                className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
+                  activeLink === "tasks" ? "text-teal" : ""
+                }`}
               >
                 <TasksIcon className="fill-current" />
                 <span>Tasks</span>
@@ -167,7 +183,9 @@ const Sidebar = ({
             <li className="border-b border-b-[#D9D9D9]">
               <Link
                 href="/message"
-                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+                className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
+                  activeLink === "message" ? "text-teal" : ""
+                }`}
               >
                 <MessageIcon className="fill-current" />
                 <span>Message</span>
