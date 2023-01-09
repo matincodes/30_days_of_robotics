@@ -39,13 +39,13 @@ const Layout = ({ children }: Props) => {
   }, [open]);
 
   return (
-    <>
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header openSidebar={openSidebar} />
-      <main className="flex h-full flex-grow">
+      <div className="flex h-full flex-grow overflow-hidden">
         <Sidebar open={open} closeSidebar={closeSidebar} />
-        {children}
-      </main>
-    </>
+        <main className="flex-grow overflow-y-auto">{children}</main>
+      </div>
+    </div>
   );
 };
 
