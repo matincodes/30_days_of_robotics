@@ -1,7 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ReactNode } from "react";
+import {
+  MouseEvent,
+  MouseEventHandler,
+  ReactNode,
+  useEffect,
+  useState,
+} from "react";
 import { useAuth } from "../context/AuthContext";
+import Close from "./Icons/Close";
 import Hamburger from "./Icons/Hamburger";
 import HomeIcon from "./Icons/HomeIcon";
 import LeaderBoardIcon from "./Icons/LeaderBoardIcon";
@@ -17,11 +24,24 @@ type Props = {
 /* use `interface` if exporting so that consumers can extend */
 
 const Layout = ({ children }: Props) => {
+  const [open, setOpen] = useState(false);
+
+  const closeSidebar: MouseEventHandler<HTMLDivElement> = (e) => {
+    setOpen(false);
+  };
+  const openSidebar: MouseEventHandler<HTMLDivElement> = (e) => {
+    setOpen(true);
+  };
+
+  useEffect(() => {
+    console.log("open", open);
+  }, [open]);
+
   return (
     <>
-      <Header />
+      <Header openSidebar={openSidebar} />
       <main className="flex h-full flex-grow">
-        <Sidebar />
+        <Sidebar open={open} closeSidebar={closeSidebar} />
         {children}
       </main>
     </>
@@ -30,7 +50,11 @@ const Layout = ({ children }: Props) => {
 
 export default Layout;
 
-const Header = () => {
+const Header = ({
+  openSidebar,
+}: {
+  openSidebar: MouseEventHandler<HTMLDivElement>;
+}) => {
   const auth = useAuth();
 
   return (
@@ -39,7 +63,7 @@ const Header = () => {
         <Link href="/" className="hidden lg:block">
           <Image alt="logo" src="/full-logo.png" width={132} height={60} />
         </Link>
-        <div className="lg:hidden cursor-pointer">
+        <div className="lg:hidden cursor-pointer" onClick={openSidebar}>
           <Hamburger />
         </div>
       </div>
@@ -74,65 +98,92 @@ const Header = () => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({
+  open,
+  closeSidebar,
+}: {
+  open: boolean;
+  closeSidebar: MouseEventHandler<HTMLDivElement>;
+}) => {
   const auth = useAuth();
-  return (
-    <aside className="max-w-sm lg:border-r border-r-[#2CE2C2] shadow-sidebar lg:pl-16 flex flex-col justify-between pb-24">
-      <ul>
-        <li className="border-b border-b-[#D9D9D9]">
-          <Link
-            href="/"
-            className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
-          >
-            <HomeIcon className="fill-current" />
-            <span>Home</span>
-          </Link>
-        </li>
-        <li className="border-b border-b-[#D9D9D9]">
-          <Link
-            href="/leaderboard"
-            className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
-          >
-            <LeaderBoardIcon className="fill-current" />
-            <span>Leaderboard</span>
-          </Link>
-        </li>
-        <li className="border-b border-b-[#D9D9D9]">
-          <Link
-            href="/submissions"
-            className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
-          >
-            <SubmissionsIcon className="fill-current" />
-            <span>Submissions</span>
-          </Link>
-        </li>
-        <li className="border-b border-b-[#D9D9D9]">
-          <Link
-            href="/tasks"
-            className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
-          >
-            <TasksIcon className="fill-current" />
-            <span>Tasks</span>
-          </Link>
-        </li>
-        <li className="border-b border-b-[#D9D9D9]">
-          <Link
-            href="/message"
-            className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
-          >
-            <MessageIcon className="fill-current" />
-            <span>Message</span>
-          </Link>
-        </li>
-      </ul>
 
+  return (
+    <>
       <div
-        className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-red-600 cursor-pointer"
-        onClick={() => auth?.logout()}
+        className={`absolute top-0 left-0 w-full h-screen bg-black bg-opacity-60 lg:hidden transition-all ease-in-out duration-500 ${
+          open ? "" : "hidden bg-opacity-0"
+        }`}
+        onClick={closeSidebar}
+      ></div>
+      <aside
+        className={`transition-all ease-in-out duration-500 w-[90vw] pl-6 pr-11 max-w-sm absolute top-0 left-0 h-screen lg:h-auto bg-white z-50 lg:static lg:border-r border-r-[#2CE2C2] shadow-sidebar pt-14 lg:pt-2 lg:pl-16 lg:pr-0 flex flex-col justify-between pb-24 ${
+          open ? "" : "-left-full"
+        }`}
       >
-        <LogoutIcon className="fill-current" />
-        <span>Log out</span>
-      </div>
-    </aside>
+        <div>
+          <div
+            className="w-fit ml-auto cursor-pointer lg:hidden"
+            onClick={closeSidebar}
+          >
+            <Close />
+          </div>
+          <ul>
+            <li className="border-b border-b-[#D9D9D9]">
+              <Link
+                href="/"
+                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+              >
+                <HomeIcon className="fill-current" />
+                <span>Home</span>
+              </Link>
+            </li>
+            <li className="border-b border-b-[#D9D9D9]">
+              <Link
+                href="/leaderboard"
+                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+              >
+                <LeaderBoardIcon className="fill-current" />
+                <span>Leaderboard</span>
+              </Link>
+            </li>
+            <li className="border-b border-b-[#D9D9D9]">
+              <Link
+                href="/submissions"
+                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+              >
+                <SubmissionsIcon className="fill-current" />
+                <span>Submissions</span>
+              </Link>
+            </li>
+            <li className="border-b border-b-[#D9D9D9]">
+              <Link
+                href="/tasks"
+                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+              >
+                <TasksIcon className="fill-current" />
+                <span>Tasks</span>
+              </Link>
+            </li>
+            <li className="border-b border-b-[#D9D9D9]">
+              <Link
+                href="/message"
+                className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal"
+              >
+                <MessageIcon className="fill-current" />
+                <span>Message</span>
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        <div
+          className="p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-red-600 cursor-pointer"
+          onClick={() => auth?.logout()}
+        >
+          <LogoutIcon className="fill-current" />
+          <span>Log out</span>
+        </div>
+      </aside>
+    </>
   );
 };
