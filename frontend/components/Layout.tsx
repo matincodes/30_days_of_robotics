@@ -35,10 +35,6 @@ const Layout = ({ children, className }: Props) => {
     setOpen(true);
   };
 
-  useEffect(() => {
-    console.log("open", open);
-  }, [open]);
-
   return (
     <div className="flex flex-col h-screen overflow-hidden">
       <Header openSidebar={openSidebar} />
