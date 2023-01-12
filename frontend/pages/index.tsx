@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Layout from "../components/Layout";
 import Leaderboard from "../components/Leaderboard";
+import Tasks from "../components/Tasks";
 import useIsAuth from "../utils/hooks/useIsAuth";
 
 export default function Home() {
@@ -20,7 +21,8 @@ export default function Home() {
         <h2 className="hidden lg:block px-5 mb-1 text-[#AEAEAE] text-4xl font-semibold">
           Home
         </h2>
-        <Leaderboard variant="scroll" className="" />
+        <Leaderboard variant="scroll" className="mb-4 lg:mb-6" />
+        <Tasks variant="list" />
       </Layout>
     </>
   );

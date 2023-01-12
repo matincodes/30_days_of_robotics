@@ -15,7 +15,7 @@ const HomeIcon = ({ size, className, ...props }: Props) => {
       className={className}
       {...props}
     >
-      <g clip-path="url(#clip0_35_2862)">
+      <g clipPath="url(#clip0_35_2862)">
         <path d="M16.6666 33.3333V23.3333H23.3333V33.3333H31.6666V20H36.6666L19.9999 5L3.33325 20H8.33325V33.3333H16.6666Z" />
       </g>
       <defs>
