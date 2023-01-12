@@ -64,9 +64,23 @@ const getLeaderboard = () => {
 
 const Leaderboard = ({ variant, className }: Props) => {
   const leaderboard = getLeaderboard();
+
+  if (!leaderboard || leaderboard.length === 0) {
+    return (
+      <div className={className}>
+        <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
+          Leaderboard
+        </h2>
+        <p className="text-[#DC2B12] text-2xl font-medium px-3 lg:px-5">
+          Not available
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div className={className}>
-      <h2 className="font-semibold text-2xl text-[#FFC200] py-[10px] px-3 lg:px-5">
+      <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
         Leaderboard
       </h2>
       {variant === "list" ? (

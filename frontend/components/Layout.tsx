@@ -21,10 +21,11 @@ import TasksIcon from "./Icons/TasksIcon";
 
 type Props = {
   children: ReactNode;
+  className?: string;
 };
 /* use `interface` if exporting so that consumers can extend */
 
-const Layout = ({ children }: Props) => {
+const Layout = ({ children, className }: Props) => {
   const [open, setOpen] = useState(false);
 
   const closeSidebar: MouseEventHandler<HTMLDivElement> = (e) => {
@@ -43,7 +44,11 @@ const Layout = ({ children }: Props) => {
       <Header openSidebar={openSidebar} />
       <div className="flex h-full flex-grow overflow-hidden">
         <Sidebar open={open} closeSidebar={closeSidebar} />
-        <main className="flex-grow overflow-y-auto">{children}</main>
+        <main
+          className={`flex-grow overflow-y-auto ${className ? className : ""}`}
+        >
+          {children}
+        </main>
       </div>
     </div>
   );

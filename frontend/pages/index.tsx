@@ -16,8 +16,11 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Layout>
-        <Leaderboard variant="list" />
+      <Layout className="py-4 lg:py-8">
+        <h2 className="hidden lg:block px-5 mb-1 text-[#AEAEAE] text-4xl font-semibold">
+          Home
+        </h2>
+        <Leaderboard variant="scroll" className="" />
       </Layout>
     </>
   );
