@@ -17,7 +17,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Layout>
-        <Leaderboard variant="scroll" />
+        <Leaderboard variant="list" />
       </Layout>
     </>
   );

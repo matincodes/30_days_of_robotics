@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { default as DivImage } from "./Image";
 
 type Props = {
   variant: "list" | "scroll";
@@ -120,19 +121,21 @@ const ListItem = ({ player, position }: ItemProps) => {
 
 const ScrollItem = ({ player, position }: ItemProps) => {
   return (
-    <div className="px-3">
-      <Image
+    <div className="px-3 border-r border-teal last:border-none lg:px-4">
+      <DivImage
         src={player.avatar}
         alt={`${player.name} avatar`}
-        height={170}
-        width={170}
-        className="rounded-full overflow-hidden w-[120px] h-[120px]"
+        // height={170}
+        // width={170}
+        className="rounded-full overflow-hidden w-[120px] h-[120px] lg:w-[170px] lg:h-[170px]"
       />
-      <div>
-        <span>{position}.</span>
+      <div className="text-center font-semibold text-sm mt-3 lg:text-base">
+        <span className="pr-1">{position}.</span>
         <span>{player.name}</span>
       </div>
-      <div>{player.points.toLocaleString()}</div>
+      <div className="text-center text-sm font-light lg:text-base">
+        {player.points.toLocaleString()}
+      </div>
     </div>
   );
 };
