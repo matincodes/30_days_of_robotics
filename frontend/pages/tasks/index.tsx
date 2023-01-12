@@ -15,7 +15,7 @@ export default function Tasks() {
         <title>30 Days of Robotics | Tasks</title>
       </Head>
       <Layout>
-        <div className="p-[4%] flex flex-col items-center justify-center">
+        <div className="p-[4%] flex flex-col items-center justify-center w-full">
           <h2 className=" font-semibold text-4xl">Tasks</h2>
           <Image
             src="/assets/tasklist.svg"
@@ -26,8 +26,8 @@ export default function Tasks() {
           <p className="text-center">
             Finish the previous days before unlocking the next one.
           </p>
-          <Link href="/tasks/allTasks">
-            <button className="uppercase text-white bg-[#2CE2C2] rounded h-[50px] w-[100%] md:w-[500px]">
+          <Link href="/tasks/allTasks" className="w-full text-center">
+            <button className="uppercase text-white bg-[#2CE2C2] rounded h-[50px] w-full md:w-[500px]">
               Tasks
             </button>
           </Link>
