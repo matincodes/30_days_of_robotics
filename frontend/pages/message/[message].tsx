@@ -30,17 +30,12 @@ const GradeMessage = () => {
   };
 
   const handleClick = () => {
-    if (score.grade === "excellent") {
-      return route.push("/message/excellent");
-    } else if (score.grade === "good") {
-      return route.push("/message/good");
-    } else if (score.grade === "fair") {
-      return route.push("/message/fair");
-    } else if (score.grade === "poor") {
-      return route.push("/message/poor");
+    if (!score.grade) {
+      return "";
+    } else {
+      return route.push("/message/graded-task");
     }
   };
-console.log(score);
 
   return (
     <>
@@ -164,8 +159,64 @@ console.log(score);
           </div>
         )}
         {route.query.message === "graded-task" && (
-          <div>
-            <h2>Graded task</h2>
+          <div className="p-[4%]">
+            <h2 className="text-4xl font-semibold text-[#AEAEAE] mb-4">
+              Message <span className="text-[#0A0A0A]">{">"} Graded Task</span>
+            </h2>
+            <h1 className="text-[#2CE2C2] text-4xl font-semibold">
+              {"DAY 1"}: Robotic arm Configuration
+            </h1>
+            <p className="text-[#969696] font-light mb-3">
+              Task Grade:{" "}
+              <span className="text-xl font-medium uppercase">{score.grade}</span>
+            </p>
+            <p className="p-[2%] w-full h-fit bg-[#EEFDFA] text-[#2CE2C2] rounded-lg border-[1px] border-[#2CE2C2]">
+              Lorem ipsum dolor sit amet consectetur. Ultrices nunc urna
+              adipiscing sit laoreet. Cursus bibendum sagittis bibendum tortor
+              cursus aenean condimentum nulla. Viverra imperdiet est et
+              consequat augue commodo tempor. At nibh sit magna diam. Ipsum
+              pellentesque euismod diam rhoncus sagittis facilisis eget.
+              Pulvinar id amet quam est faucibus enim quis a aliquet. Pharetra
+              quis proin vel convallis amet blandit maecenas morbi. Consequat
+              rhoncus ipsum cursus urna proin arcu. Placerat neque egestas
+              tempus pulvinar tristique.
+            </p>
+            {(score.grade === "excellent" && (
+              <Image
+                src="/assets/excellent.svg"
+                width={250}
+                height={250}
+                className="object-contain"
+                alt="Grade"
+              />
+            )) ||
+              (score.grade === "good" && (
+                <Image
+                  src="/assets/good.svg"
+                  width={250}
+                  height={250}
+                  className="object-contain"
+                  alt="Grade"
+                />
+              )) ||
+              (score.grade === "fair" && (
+                <Image
+                  src="/assets/fair.svg"
+                  width={250}
+                  height={250}
+                  className="object-contain"
+                  alt="Grade"
+                />
+              )) ||
+              (score.grade === "poor" && (
+                <Image
+                  src="/assets/poor.svg"
+                  width={250}
+                  height={250}
+                  className="object-contain"
+                  alt="Grade"
+                />
+              ))}
           </div>
         )}
       </Layout>
