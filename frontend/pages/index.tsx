@@ -22,7 +22,7 @@ export default function Home() {
           Home
         </h2>
         <Leaderboard variant="scroll" className="mb-4 lg:mb-6" />
-        <Tasks variant="list" />
+        <Tasks variant="grid" />
       </Layout>
     </>
   );

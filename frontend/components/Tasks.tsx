@@ -217,9 +217,15 @@ const Tasks = ({ variant, className }: Props) => {
 
   return (
     <div className={className}>
-      <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
-        Tasks
-      </h2>
+      {variant === "list" ? (
+        <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
+          Tasks
+        </h2>
+      ) : (
+        <h2 className="font-semibold text-4xl py-[10px] px-3 lg:px-5 mb-2">
+          Tasks
+        </h2>
+      )}
       {variant === "list" ? (
         <div className="grid gap-3 px-[10px] lg:px-5">
           {tasks.map((task) => (
@@ -227,7 +233,7 @@ const Tasks = ({ variant, className }: Props) => {
           ))}
         </div>
       ) : (
-        <div className="grid gap-2 px-[10px] lg:px-5">
+        <div className="w-full h-fit px-[10px] lg:px-5 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-3 xl:grid-cols-4 gap-4">
           {tasks.map((task) => (
             <GridItem task={task} key={task.id} />
           ))}
@@ -275,13 +281,27 @@ const ListItem = ({ task }: { task: taskItem }) => {
 };
 
 const GridItem = ({ task }: { task: taskItem }) => {
-  return (
-    <div>
-      <div>
-        <p>Day {task.day}</p>
-        <p>{task.title}</p>
+  return task.unlocked ? (
+    <Link href={`/tasks/${task.id}`}>
+      <div className="p-[4%] md:w-[165px] lg:w-[185px] xl:w-[195px] h-[180px] bg-gradient-to-r from-[#2CE2C2] to-[#1F7B6B] rounded-lg flex flex-col items-center justify-center">
+        <p className="text-[#DDEB89] text-center font-semibold text-4xl uppercase">
+          Day
+        </p>
+        <p className="text-[#DDEB89] text-center font-semibold text-4xl mb-4">
+          {task.day}
+        </p>
+        <p className="text-white text-center">{task.title}</p>
       </div>
-      {!task.unlocked && <Lock />}
+    </Link>
+  ) : (
+    <div className="p-[4%] cursor-not-allowed md:w-[165px] lg:w-[185px] xl:w-[195px] h-[180px] border-[#7E7E7E] border-[2px] rounded-lg flex flex-col items-center justify-center">
+      <p className="text-[#7E7E7E] text-center font-semibold text-4xl uppercase">
+        Day
+      </p>
+      <p className="text-[#7E7E7E] text-center font-semibold text-4xl mb-4">
+        {task.day}
+      </p>
+      <p className="text-[#7E7E7E] text-center">{task.title}</p>
     </div>
   );
 };
