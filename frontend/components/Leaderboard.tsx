@@ -4,6 +4,7 @@ import { default as DivImage } from "./Image";
 type Props = {
   variant: "list" | "scroll";
   className?: string;
+  title?: boolean;
 };
 /* use `interface` if exporting so that consumers can extend */
 
@@ -62,7 +63,7 @@ const getLeaderboard = () => {
   ];
 };
 
-const Leaderboard = ({ variant, className }: Props) => {
+const Leaderboard = ({ variant, className, title = true }: Props) => {
   const leaderboard = getLeaderboard();
 
   if (!leaderboard || leaderboard.length === 0) {
@@ -80,9 +81,11 @@ const Leaderboard = ({ variant, className }: Props) => {
 
   return (
     <div className={className}>
-      <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
-        Leaderboard
-      </h2>
+      {title && (
+        <h2 className="font-semibold text-2xl text-[#AEAEAE] py-[10px] px-3 lg:px-5">
+          Leaderboard
+        </h2>
+      )}
       {variant === "list" ? (
         <div className="grid gap-2 px-[10px] lg:px-5">
           {leaderboard.map((player, index) => (
