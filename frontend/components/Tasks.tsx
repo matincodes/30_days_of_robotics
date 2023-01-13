@@ -221,7 +221,7 @@ const Tasks = ({ variant, className }: Props) => {
         Tasks
       </h2>
       {variant === "list" ? (
-        <div className="grid gap-2 px-[10px] lg:px-5">
+        <div className="grid gap-3 px-[10px] lg:px-5">
           {tasks.map((task) => (
             <ListItem task={task} key={task.id} />
           ))}
@@ -240,25 +240,37 @@ const Tasks = ({ variant, className }: Props) => {
 export default Tasks;
 
 const ListItem = ({ task }: { task: taskItem }) => {
-  return (
+  return task.unlocked ? (
     <Link href={`/tasks/${task.id}`}>
       <div
-        className={`px-2 py-5 flex items-center rounded-lg ${
-          task.unlocked ? "" : "border border-[#7E7E7E]"
-        }`}
+        className="px-2 py-5 flex items-center rounded-lg gap-4"
         style={{
-          background: task.unlocked
-            ? "linear-gradient(105.1deg, #2CE2C2 -17.57%, #1F7B6B 169.54%)"
-            : "#F9F9F9",
+          background:
+            "linear-gradient(105.1deg, #2CE2C2 -17.57%, #1F7B6B 169.54%)",
         }}
       >
-        <div className="grow">
-          <p className="">Day {task.day}</p>
-          <p>{task.title}</p>
+        <div className="grow flex gap-4 items-center lg:items-start lg:flex-col lg:gap-1 ">
+          <p className="font-semibold leading-6 text-2xl lg:text-4xl lg:leading-9 text-[#FFFBFB]">
+            Day {task.day}
+          </p>
+          <p className="grow text-base leading-4 font-norma lg:text-2xl lg:leading-6 text-[#DDEB89]">
+            {task.title}
+          </p>
         </div>
-        {!task.unlocked && <Lock />}
       </div>
     </Link>
+  ) : (
+    <div className="px-2 py-5 flex items-center rounded-lg gap-4 border border-[#7E7E7E] bg-[#F9F9F9] cursor-not-allowed">
+      <div className="grow flex items-center lg:items-start gap-4 lg:flex-col lg:gap-1 ">
+        <p className="font-semibold leading-6 text-2xl lg:text-4xl lg:leading-9 text-[#7E7E7E]">
+          Day {task.day}
+        </p>
+        <p className="grow text-base leading-4 font-norma lg:text-2xl lg:leading-6 text-[#7E7E7E]">
+          {task.title}
+        </p>
+      </div>
+      <Lock className="fill-[#7E7E7E]" />
+    </div>
   );
 };
 
