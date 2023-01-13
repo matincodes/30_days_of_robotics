@@ -19,7 +19,7 @@ export default function Message() {
             Message
           </h2>
           <Link href="/message/task-grading">
-            <div className="w-full h-[80px] bg-[#FAFEE7] border-b-2 border-[#DDEB89] rounded-lg p-[2%] mb-4">
+            <div className="w-full h-fit bg-[#FAFEE7] border-b-2 border-[#DDEB89] rounded-lg p-[2%] mb-4">
               <h3 className="text-[#BFD059] font-semibold text-2xl uppercase">
                 Task Grading
               </h3>
@@ -29,7 +29,7 @@ export default function Message() {
             </div>
           </Link>
           <Link href="/message/graded-task">
-            <div className="w-full h-[80px] bg-[#EEFDFA] border-b-2 border-[#2CE2C2] rounded-lg p-[2%] mb-4">
+            <div className="w-full h-fit bg-[#EEFDFA] border-b-2 border-[#2CE2C2] rounded-lg p-[2%] mb-4">
               <h3 className="text-[#55CDB7] font-semibold text-2xl uppercase">
                 Graded task
               </h3>
