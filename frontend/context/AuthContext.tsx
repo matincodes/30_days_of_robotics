@@ -7,6 +7,8 @@ type user = {
   email: string;
   track: string;
   avatar: string;
+  points: number;
+  position: number;
 };
 interface AuthContextInterface {
   user: user | null;
@@ -25,6 +27,8 @@ const sampleUser: user = {
   email: "bakarefaruq.a@gmail.com",
   track: "robotics",
   avatar: "/avatar.png",
+  points: 1000,
+  position: 3,
 };
 
 type Props = {

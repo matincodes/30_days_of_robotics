@@ -22,7 +22,7 @@ const useIsAuth = () => {
     </main>
   );
 
-  return [loading, FullLoadingSpinner];
+  return { loading, FullLoadingSpinner, auth };
 };
 
 export default useIsAuth;

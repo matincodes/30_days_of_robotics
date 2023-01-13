@@ -45,7 +45,7 @@ const getTask = (id: string | number): taskItem => {
 };
 
 const DailyTasks = () => {
-  const [loading, FullLoadingSpinner] = useIsAuth();
+  const {loading, FullLoadingSpinner} = useIsAuth();
 
   const router = useRouter();
   const { id } = router.query;

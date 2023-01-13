@@ -3,7 +3,7 @@ import Layout from "../components/Layout";
 import useIsAuth from "../utils/hooks/useIsAuth";
 
 export default function Message() {
-  const [loading, FullLoadingSpinner] = useIsAuth();
+  const {loading, FullLoadingSpinner} = useIsAuth();
 
   if (loading) return FullLoadingSpinner;
 

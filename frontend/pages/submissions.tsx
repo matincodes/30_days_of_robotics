@@ -40,7 +40,7 @@ const getSubmissions = (): submissionItem[] | null => {
   ];
 };
 export default function Submissions() {
-  const [loading, FullLoadingSpinner] = useIsAuth();
+  const {loading, FullLoadingSpinner} = useIsAuth();
   const submissions = getSubmissions();
 
   if (loading) return FullLoadingSpinner;

@@ -4,7 +4,7 @@ import useIsAuth from "../utils/hooks/useIsAuth";
 import { default as LeaderboardComponent } from "../components/Leaderboard";
 
 export default function Leaderboard() {
-  const [loading, FullLoadingSpinner] = useIsAuth();
+  const {loading, FullLoadingSpinner} = useIsAuth();
 
   if (loading) return FullLoadingSpinner;
 
