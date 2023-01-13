@@ -6,56 +6,73 @@ type Props = {
   className?: string;
   title?: boolean;
 };
+
+type player = {
+  id: string | number;
+  name: string;
+  avatar: string;
+  points: number;
+};
 /* use `interface` if exporting so that consumers can extend */
 
-const getLeaderboard = () => {
+const getLeaderboard = (): player[] | null => {
   return [
     {
+      id: 1,
       name: "Nakamura",
       avatar: "/avatar.png",
       points: 10000,
     },
     {
+      id: 2,
       name: "Lithmus",
       avatar: "/avatar.png",
       points: 9000,
     },
     {
+      id: 3,
       name: "Zang",
       avatar: "/avatar.png",
       points: 8000,
     },
     {
+      id: 4,
       name: "BlessTheBoy",
       avatar: "/avatar.png",
       points: 7000,
     },
     {
+      id: 5,
       name: "Tholarni",
       avatar: "/avatar.png",
       points: 6000,
     },
     {
+      id: 6,
       name: "Joshephine",
       avatar: "/avatar.png",
       points: 5000,
     },
     {
+      id: 7,
       name: "Olakunle",
       avatar: "/avatar.png",
       points: 4000,
     },
     {
+      id: 8,
       name: "Abdulmatin",
       avatar: "/avatar.png",
       points: 3000,
     },
     {
+      id: 9,
       name: "Ridwan",
       avatar: "/avatar.png",
       points: 2000,
     },
     {
+      id: 10,
       name: "Mr. Action",
       avatar: "/avatar.png",
       points: 1000,
@@ -96,7 +113,11 @@ const Leaderboard = ({ variant, className, title = true }: Props) => {
         <div className="overflow-x-scroll  px-[10px] lg:px-5 no-scrollbar">
           <div className="flex py-[14px]  border border-[#45E3C6] rounded bg-[#EEFDFA] w-fit">
             {leaderboard.map((player, index) => (
-              <ScrollItem player={player} position={index + 1} key={index} />
+              <ScrollItem
+                player={player}
+                position={index + 1}
+                key={player.id}
+              />
             ))}
           </div>
         </div>
@@ -108,11 +129,7 @@ const Leaderboard = ({ variant, className, title = true }: Props) => {
 export default Leaderboard;
 
 type ItemProps = {
-  player: {
-    name: string;
-    avatar: string;
-    points: number;
-  };
+  player: player;
   position: number;
 };
 /* use `interface` if exporting so that consumers can extend */
