@@ -15,8 +15,8 @@ type player = {
 };
 /* use `interface` if exporting so that consumers can extend */
 
-const getLeaderboard = (): player[] | null => {
-  return [
+const getLeaderboard = async (): Promise<player[] | null> => {
+  const leaderboard: player[] = [
     {
       id: 1,
       name: "Nakamura",
@@ -78,10 +78,16 @@ const getLeaderboard = (): player[] | null => {
       points: 1000,
     },
   ];
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(leaderboard);
+    }, 2000);
+  });
 };
 
-const Leaderboard = ({ variant, className, title = true }: Props) => {
-  const leaderboard = getLeaderboard();
+const Leaderboard = async ({ variant, className, title = true }: Props) => {
+  const leaderboard = await getLeaderboard();
 
   if (!leaderboard || leaderboard.length === 0) {
     return (

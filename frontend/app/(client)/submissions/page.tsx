@@ -1,9 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
-import DoubleCheck from "../components/Icons/DoubleCheck";
-import Info from "../components/Icons/Info";
-import Layout from "../components/Layout";
-import useIsAuth from "../utils/hooks/useIsAuth";
+import DoubleCheck from "../../../components/Icons/DoubleCheck";
+import Info from "../../../components/Icons/Info";
 
 interface submissionItem {
   id: string | number;
@@ -14,8 +12,8 @@ interface submissionItem {
 }
 /* use `interface` if exporting so that consumers can extend */
 
-const getSubmissions = (): submissionItem[] | null => {
-  return [
+const getSubmissions = async (): Promise<submissionItem[] | null> => {
+  const submissions = [
     {
       id: 1,
       taskId: 1,
@@ -38,41 +36,39 @@ const getSubmissions = (): submissionItem[] | null => {
       submitted: false,
     },
   ];
-};
-export default function Submissions() {
-  const {loading, FullLoadingSpinner} = useIsAuth();
-  const submissions = getSubmissions();
 
-  if (loading) return FullLoadingSpinner;
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(submissions);
+    }, 2000);
+  });
+};
+export default async function Submissions() {
+  const submissions = await getSubmissions();
 
   return (
-    <>
-      <Head>
-        <title>30 Days of Robotics | Submissions</title>
-      </Head>
-      <Layout className="py-4 lg:py-8 px-3 lg:px-5">
-        <h2 className="font-semibold text-2xl text-[#AEAEAE] mb-2">
-          Submissions
-        </h2>
-        {!submissions || submissions.length === 0 ? (
-          <p
-            className={`${
-              submissions ? "text-teal" : "text-[#DC2B12]"
-            } text-2xl font-medium px-3 lg:px-5`}
-          >
-            {!submissions
-              ? "Not available"
-              : "All your submissions and pending submission will be listed here"}
-          </p>
-        ) : (
-          <div className="grid gap-3">
-            {submissions.map((submission) => (
-              <ListItem submission={submission} key={submission.id} />
-            ))}
-          </div>
-        )}
-      </Layout>
-    </>
+    <div className="py-4 lg:py-8 px-3 lg:px-5">
+      <h2 className="font-semibold text-2xl text-[#AEAEAE] mb-2">
+        Submissions
+      </h2>
+      {!submissions || submissions.length === 0 ? (
+        <p
+          className={`${
+            submissions ? "text-teal" : "text-[#DC2B12]"
+          } text-2xl font-medium px-3 lg:px-5`}
+        >
+          {!submissions
+            ? "Not available"
+            : "All your submissions and pending submission will be listed here"}
+        </p>
+      ) : (
+        <div className="grid gap-3">
+          {submissions.map((submission) => (
+            <ListItem submission={submission} key={submission.id} />
+          ))}
+        </div>
+      )}
+    </div>
   );
 }
 

@@ -14,8 +14,8 @@ interface taskItem {
 }
 /* use `interface` if exporting so that consumers can extend */
 
-const getTasks = (): taskItem[] | null => {
-  return [
+const getTasks = async (): Promise<taskItem[] | null> => {
+  const tasks: taskItem[] = [
     {
       id: 1,
       day: 1,
@@ -197,10 +197,16 @@ const getTasks = (): taskItem[] | null => {
       unlocked: false,
     },
   ];
+
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(tasks);
+    }, 2000);
+  });
 };
 
-const Tasks = ({ variant, className }: Props) => {
-  const tasks = getTasks();
+const Tasks = async ({ variant, className }: Props) => {
+  const tasks = await getTasks();
 
   if (!tasks || tasks.length === 0) {
     return (
