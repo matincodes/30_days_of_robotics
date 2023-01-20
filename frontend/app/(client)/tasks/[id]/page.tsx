@@ -28,10 +28,10 @@ type Props = {
 };
 
 const getTask = async (id: string | number): Promise<Task> => {
-  const query = groq`*[_type=='task' && day.current == id][0]{
+  const query = groq`*[_type=='task' && day == $id][0]{
     ...,
   }`;
-  return client.fetch(query, { id });
+  return client.fetch(query, { id: Number(id) });
 };
 
 const getUserTaskStatus = async (
