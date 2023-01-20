@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { default as LinkIcon } from "../../../../components/Icons/Link";
 import TaskSubmissionSection from "../../../../components/TaskSubmissionSection";
+import { groq } from "next-sanity";
+import { client } from "../../../../utils/sanity.client";
+import { PortableText } from "@portabletext/react";
+import { RichTextComponents } from "../../../../components/RichTextComponents";
 
-interface taskItem {
-  id: string | number;
-  day: number;
-  title: string;
-  content: string;
-  unlocked: boolean;
-}
+// interface taskItem {
+//   id: string | number;
+//   day: number;
+//   title: string;
+//   content: string;
+//   unlocked: boolean;
+// }
 
 type userTaskDetail = {
   submitted: boolean;
@@ -23,30 +27,11 @@ type Props = {
   };
 };
 
-const getTask = async (id: string | number): Promise<taskItem> => {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(
-        id == 1
-          ? {
-              id: 1,
-              day: 1,
-              title: "Robotic arm Configuration",
-              content:
-                "Lorem ipsum dolor sit amet consectetur. Lectus felis arcu quam sapien velit maecenas nunc facilisi cras.Ultrices integer nulla cursus dolor mi morbi aliquet elementum. Leo sit neque sit sagittis tincidunt id neque. Aliquam elementum erat et  volutpat vestibulum tortor amet viverra morbi.",
-              unlocked: true,
-            }
-          : {
-              id: 2,
-              day: 2,
-              title: "Robotic arm Configuration",
-              content:
-                "Lorem ipsum dolor sit amet consectetur. Lectus felis arcu quam sapien velit maecenas nunc facilisi cras.Ultrices integer nulla cursus dolor mi morbi aliquet elementum. Leo sit neque sit sagittis tincidunt id neque. Aliquam elementum erat et  volutpat vestibulum tortor amet viverra morbi.",
-              unlocked: true,
-            }
-      );
-    }, 2000);
-  });
+const getTask = async (id: string | number): Promise<Task> => {
+  const query = groq`*[_type=='task' && day.current == id][0]{
+    ...,
+  }`;
+  return client.fetch(query, { id });
 };
 
 const getUserTaskStatus = async (
@@ -75,6 +60,8 @@ export default async function Task({ params: { id } }: Props) {
   const task = await getTask(id);
   const taskStatus = await getUserTaskStatus(id);
 
+  // console.log("task", task);
+
   return (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
@@ -101,13 +88,8 @@ export default async function Task({ params: { id } }: Props) {
         </div>
       )}
 
-      <p className="text-[#969696]">
-        Lorem ipsum dolor sit amet consectetur. Lectus felis arcu quam sapien
-        velit maecenas nunc facilisi cras. Ultrices integer nulla cursus dolor
-        mi morbi aliquet elementum. Leo sit neque sit sagittis tincidunt id
-        neque. Aliquam elementum erat et volutpat vestibulum tortor amet viverra
-        morbi.
-      </p>
+      <PortableText value={task.content} components={RichTextComponents} />
+
       {taskStatus.submitted ? (
         <p className="text-[#2CE2C2] font-semibold text-2xl mt-[50px]">
           Your task has been submitted successfully!
