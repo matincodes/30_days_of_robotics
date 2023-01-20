@@ -62,6 +62,29 @@ export default async function Task({ params: { id } }: Props) {
 
   // console.log("task", task);
 
+  if (!task.unlocked)
+    return (
+      <div className="p-[4%]">
+        <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
+          <Link href="/allTasks">Tasks</Link>{" "}
+          <span className="text-[#0A0A0A]">
+            {">"} Day {task.day}
+          </span>
+        </h2>
+        <h1 className="text-[#2CE2C2] font-semibold text-4xl">{task.title}</h1>
+
+        <div className="mt-2">
+          This task will be unlocked on{" "}
+          {new Date(task.startDate).toLocaleDateString("en-us", {
+            weekday: "long",
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+          })}
+        </div>
+      </div>
+    );
+
   return (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
