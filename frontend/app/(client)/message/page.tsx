@@ -1,7 +1,5 @@
-import Link from "next/link";
 import React from "react";
-import DoubleCheck from "../../../components/Icons/DoubleCheck";
-import Info from "../../../components/Icons/Info";
+import ClientSideRoute from "../../../components/ClientSideRoute";
 
 type message = {
   id: string | number;
@@ -33,7 +31,7 @@ const getMessages = async (): Promise<message[] | null> => {
   });
 };
 
-export default async function page() {
+export default async function message() {
   const messages = await getMessages();
   return (
     <div className="py-4 lg:py-8 px-3 lg:px-5">
@@ -61,7 +59,7 @@ export default async function page() {
 
 const ListItem = ({ message }: { message: message }) => {
   return (
-    <Link href={`/message/${message.id}`}>
+    <ClientSideRoute route={`/message/${message.id}`}>
       <div
         className={`p-[10px] pl-4 lg:p-4 flex items-center rounded-lg gap-4 border-b-2 ${
           message.type === "task"
@@ -82,6 +80,6 @@ const ListItem = ({ message }: { message: message }) => {
           </p>
         </div>
       </div>
-    </Link>
+    </ClientSideRoute>
   );
 };

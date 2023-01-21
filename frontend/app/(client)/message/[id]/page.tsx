@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import ClientSideRoute from "../../../../components/ClientSideRoute";
 import TaskGradingSection from "../../../../components/TaskGradingSection";
 
 type Props = {
@@ -86,7 +86,7 @@ export default async function Message({ params: { id } }: Props) {
   return message.type === "task" ? (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-        <Link href="/message">Message</Link>{" "}
+        <ClientSideRoute route="/message">Message</ClientSideRoute>{" "}
         <span className="text-[#0A0A0A]">{">"} Task Grading</span>
       </h2>
       <h1 className="text-[#2CE2C2] text-4xl font-semibold">
@@ -94,12 +94,11 @@ export default async function Message({ params: { id } }: Props) {
       </h1>
       <div className="my-3">
         <span>Day {message.task.day}:</span>{" "}
-        <Link
-          href={`/tasks/${message.task.id}`}
-          className="underline decoration-teal "
-        >
-          {message.task.title}
-        </Link>
+        <ClientSideRoute route={`/tasks/${message.task.id}`}>
+          <span className="underline decoration-teal ">
+            {message.task.title}
+          </span>
+        </ClientSideRoute>
       </div>
       <p className="text-[#969696] font-light text-xl mb-2">
         Get the link to the submission below. Then proceed to the rubric
@@ -113,12 +112,11 @@ export default async function Message({ params: { id } }: Props) {
           className="object-contain"
           alt="Submit link"
         />
-        <Link
-          href={message.submission.link}
-          className="text-[#2CE2C2] font-medium text-base md:text-xl ml-3"
-        >
-          {message.submission.link}
-        </Link>
+        <ClientSideRoute route={message.submission.link}>
+          <span className="text-[#2CE2C2] font-medium text-base md:text-xl ml-3">
+            {message.submission.link}
+          </span>
+        </ClientSideRoute>
       </div>
       <p className="text-[#0A0A0A] font-medium text-xl mb-3">Grade here</p>
       <TaskGradingSection id={id} />
@@ -126,14 +124,14 @@ export default async function Message({ params: { id } }: Props) {
   ) : (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-        <Link href="/message">Message</Link>{" "}
+        <ClientSideRoute route="/message">Message</ClientSideRoute>{" "}
         <span className="text-[#0A0A0A]">{">"} Graded Task</span>
       </h2>
       <h1 className="text-[#2CE2C2] text-4xl font-semibold">
         Day {message.task.day}:{" "}
-        <Link href={`/tasks/${message.task.id}`} className="underline">
-          {message.task.title}
-        </Link>
+        <ClientSideRoute route={`/tasks/${message.task.id}`}>
+          <span className="underline">{message.task.title}</span>
+        </ClientSideRoute>
       </h1>
       <p className="text-[#969696] font-light mb-3 mt-2">
         Task Grade:{" "}

@@ -1,5 +1,4 @@
-import Head from "next/head";
-import Link from "next/link";
+import ClientSideRoute from "../../../components/ClientSideRoute";
 import DoubleCheck from "../../../components/Icons/DoubleCheck";
 import Info from "../../../components/Icons/Info";
 
@@ -74,7 +73,7 @@ export default async function Submissions() {
 
 const ListItem = ({ submission }: { submission: submissionItem }) => {
   return (
-    <Link href={`/tasks/${submission.taskId}`}>
+    <ClientSideRoute route={`/tasks/${submission.taskId}`}>
       <div
         className={`p-[10px] pl-4 lg:p-4 flex items-center rounded-lg gap-4 border-b-2 ${
           submission.submitted
@@ -96,6 +95,6 @@ const ListItem = ({ submission }: { submission: submissionItem }) => {
         </div>
         {submission.submitted ? <DoubleCheck /> : <Info />}
       </div>
-    </Link>
+    </ClientSideRoute>
   );
 };

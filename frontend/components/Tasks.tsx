@@ -1,6 +1,6 @@
 import { groq } from "next-sanity";
-import Link from "next/link";
 import { client } from "../utils/sanity.client";
+import ClientSideRoute from "./ClientSideRoute";
 import Lock from "./Icons/Lock";
 
 type Props = {
@@ -262,7 +262,7 @@ export default Tasks;
 
 const ListItem = ({ task }: { task: Task }) => {
   return task.unlocked ? (
-    <Link href={`/tasks/${task.day}`}>
+    <ClientSideRoute route={`/tasks/${task.day}`}>
       <div
         className="px-2 py-5 flex items-center rounded-lg gap-4"
         style={{
@@ -279,7 +279,7 @@ const ListItem = ({ task }: { task: Task }) => {
           </p>
         </div>
       </div>
-    </Link>
+    </ClientSideRoute>
   ) : (
     <div className="px-2 py-5 flex items-center rounded-lg gap-4 border border-[#7E7E7E] bg-[#F9F9F9] cursor-not-allowed">
       <div className="grow flex items-center lg:items-start gap-4 lg:flex-col lg:gap-1 ">
@@ -297,7 +297,7 @@ const ListItem = ({ task }: { task: Task }) => {
 
 const GridItem = ({ task }: { task: Task }) => {
   return task.unlocked ? (
-    <Link href={`/tasks/${task.day}`}>
+    <ClientSideRoute route={`/tasks/${task.day}`}>
       <div className="p-[4%] md:w-[165px] lg:w-[185px] xl:w-[195px] h-[180px] bg-gradient-to-r from-[#2CE2C2] to-[#1F7B6B] rounded-lg flex flex-col items-center justify-center">
         <p className="text-[#DDEB89] text-center font-semibold text-4xl uppercase">
           Day
@@ -307,7 +307,7 @@ const GridItem = ({ task }: { task: Task }) => {
         </p>
         <p className="text-white text-center">{task.title}</p>
       </div>
-    </Link>
+    </ClientSideRoute>
   ) : (
     <div className="p-[4%] cursor-not-allowed md:w-[165px] lg:w-[185px] xl:w-[195px] h-[180px] border-[#7E7E7E] border-[2px] rounded-lg flex flex-col items-center justify-center">
       <p className="text-[#7E7E7E] text-center font-semibold text-4xl uppercase">

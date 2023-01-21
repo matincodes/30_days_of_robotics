@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { default as LinkIcon } from "../../../../components/Icons/Link";
 import TaskSubmissionSection from "../../../../components/TaskSubmissionSection";
 import { groq } from "next-sanity";
 import { client } from "../../../../utils/sanity.client";
 import { PortableText } from "@portabletext/react";
 import { RichTextComponents } from "../../../../components/RichTextComponents";
+import ClientSideRoute from "../../../../components/ClientSideRoute";
 
 // interface taskItem {
 //   id: string | number;
@@ -66,7 +66,7 @@ export default async function Task({ params: { id } }: Props) {
     return (
       <div className="p-[4%]">
         <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-          <Link href="/allTasks">Tasks</Link>{" "}
+          <ClientSideRoute route="/allTasks">Tasks</ClientSideRoute>{" "}
           <span className="text-[#0A0A0A]">
             {">"} Day {task.day}
           </span>
@@ -88,7 +88,7 @@ export default async function Task({ params: { id } }: Props) {
   return (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-        <Link href="/allTasks">Tasks</Link>{" "}
+        <ClientSideRoute route="/allTasks">Tasks</ClientSideRoute>{" "}
         <span className="text-[#0A0A0A]">
           {">"} Day {task.day}
         </span>

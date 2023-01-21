@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import ClientSideRoute from "../../../components/ClientSideRoute";
 
 export default function Tasks() {
   return (
@@ -15,11 +15,11 @@ export default function Tasks() {
         <p className="text-center">
           Finish the previous days before unlocking the next one.
         </p>
-        <Link href="/tasks/allTasks" className="w-full text-center">
+        <ClientSideRoute route="/tasks/allTasks">
           <button className="uppercase text-white bg-[#2CE2C2] rounded h-[50px] w-full md:w-[500px]">
             Tasks
           </button>
-        </Link>
+        </ClientSideRoute>
       </div>
     </>
   );
