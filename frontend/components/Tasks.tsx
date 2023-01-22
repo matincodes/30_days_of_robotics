@@ -215,7 +215,9 @@ const getTasks = async (): Promise<Task[]> => {
 };
 
 const Tasks = async ({ variant, className }: Props) => {
-  const tasks = await getTasks();
+  const tasks = await getTasks().then((tasks) =>
+    tasks.sort((a, b) => a.day - b.day)
+  );
 
   if (!tasks || tasks.length === 0) {
     return (
