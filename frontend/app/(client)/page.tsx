@@ -1,6 +1,7 @@
 import Leaderboard from "../../components/Leaderboard";
 import Tasks from "../../components/Tasks";
 
+
 export default function HomePage() {
   return (
     <div className="py-4 lg:py-8">

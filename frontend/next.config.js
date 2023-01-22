@@ -17,6 +17,3 @@ const nextConfig = {
 };
 
 module.exports = nextConfig
-
-
-//  (https://cdn.sanity.io/images

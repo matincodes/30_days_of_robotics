@@ -14,6 +14,8 @@ import ClientSideRoute from "../../../../components/ClientSideRoute";
 //   unlocked: boolean;
 // }
 
+export const dynamic = "force-dynamic";
+
 type userTaskDetail = {
   submitted: boolean;
   submissionLink?: string;
@@ -61,12 +63,13 @@ export default async function Task({ params: { id } }: Props) {
   const taskStatus = await getUserTaskStatus(id);
 
   // console.log("task", task);
+  // console.log("log from task page");
 
   if (!task.unlocked)
     return (
       <div className="p-[4%]">
         <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-          <ClientSideRoute route="/allTasks">Tasks</ClientSideRoute>{" "}
+          <ClientSideRoute route="/tasks/allTasks">Tasks</ClientSideRoute>{" "}
           <span className="text-[#0A0A0A]">
             {">"} Day {task.day}
           </span>
@@ -88,7 +91,7 @@ export default async function Task({ params: { id } }: Props) {
   return (
     <div className="p-[4%]">
       <h2 className="font-semibold text-4xl text-[#AEAEAE] mb-[16px]">
-        <ClientSideRoute route="/allTasks">Tasks</ClientSideRoute>{" "}
+        <ClientSideRoute route="/tasks/allTasks">Tasks</ClientSideRoute>{" "}
         <span className="text-[#0A0A0A]">
           {">"} Day {task.day}
         </span>

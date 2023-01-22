@@ -4,6 +4,8 @@ type Props = {
 };
 /* use `interface` if exporting so that consumers can extend */
 
+"use client";
+
 const SubmissionsIcon = ({ size, className, ...props }: Props) => {
   return (
     <svg

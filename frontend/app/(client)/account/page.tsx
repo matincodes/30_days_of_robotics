@@ -1,6 +1,5 @@
-"use client";
-
-import Link from "next/link";
+import AccountLogout from "../../../components/accountLogout";
+import ClientSideRoute from "../../../components/ClientSideRoute";
 import Image from "../../../components/Image";
 import numberToPlace from "../../../utils/numberToPostion";
 
@@ -44,8 +43,6 @@ const getMe = (): user => {
 export default function Account() {
   const me = getMe();
 
-  const logout = () => {};
-
   return (
     <div className="py-4 lg:py-8 px-3 lg:px-5">
       <div className="flex flex-col items-center">
@@ -82,18 +79,12 @@ export default function Account() {
       </div>
 
       <div className="lg:hidden mt-40 mb-10">
-        <Link
-          href="/"
-          className="block w-full mb-4 bg-teal py-4 text-base leading-none font-semibold rounded text-[#F5F5F5] text-center"
-        >
-          Home
-        </Link>
-        <div
-          className="block w-full text-red-600 py-4 text-base leading-none font-semibold rounded text-center border border-red-600"
-          onClick={() => logout()}
-        >
-          Logout
-        </div>
+        <ClientSideRoute route="/">
+          <span className="block w-full mb-4 bg-teal py-4 text-base leading-none font-semibold rounded text-[#F5F5F5] text-center">
+            Home
+          </span>
+        </ClientSideRoute>
+        <AccountLogout />
       </div>
     </div>
   );

@@ -1,6 +1,9 @@
 import Image from "next/image";
 import ClientSideRoute from "../../../components/ClientSideRoute";
 
+export const dynamic = "force-static",
+  revalidate = false;
+
 export default function Tasks() {
   return (
     <>

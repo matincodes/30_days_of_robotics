@@ -26,7 +26,7 @@ const Sidebar = ({
     .slice(1)
     .toLocaleLowerCase();
 
-  console.log("activeLink", activeLink);
+  // console.log("activeLink", activeLink);
 
   return (
     <>

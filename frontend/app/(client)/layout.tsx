@@ -9,6 +9,8 @@ import Logo from "../../components/Icons/Logo";
 import Sidebar from "../../components/Sidebar";
 import { useAuth } from "../../context/AuthContext";
 
+export const dynamic = "auto";
+
 const josefinSans = Josefin_Sans({
   weight: ["300", "400", "600"],
   subsets: ["latin"],
