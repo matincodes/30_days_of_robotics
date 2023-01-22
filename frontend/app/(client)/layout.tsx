@@ -24,7 +24,9 @@ export default function RootLayout({
 }) {
   const [open, setOpen] = useState(false);
 
-  const closeSidebar: MouseEventHandler<HTMLDivElement> = (e) => {
+  const closeSidebar: MouseEventHandler<HTMLDivElement | HTMLLIElement> = (
+    e
+  ) => {
     setOpen(false);
   };
   const openSidebar: MouseEventHandler<HTMLDivElement> = (e) => {

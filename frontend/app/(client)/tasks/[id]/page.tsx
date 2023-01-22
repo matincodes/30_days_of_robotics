@@ -15,6 +15,7 @@ import ClientSideRoute from "../../../../components/ClientSideRoute";
 // }
 
 export const dynamic = "force-dynamic";
+export const revalidate = 60;
 
 type userTaskDetail = {
   submitted: boolean;
@@ -25,9 +26,22 @@ type userTaskDetail = {
 
 type Props = {
   params: {
-    id: string;
+    id: string | number;
   };
 };
+
+export async function generateStaticParams() {
+  const query = groq`*[_type=='task']{
+  _id,
+  day
+}`;
+
+  const tasks: Task[] = await client.fetch(query);
+
+  return tasks.map((task) => ({
+    id: task.day.toString(),
+  }));
+}
 
 const getTask = async (id: string | number): Promise<Task> => {
   const query = groq`*[_type=='task' && day == $id][0]{

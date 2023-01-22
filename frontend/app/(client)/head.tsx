@@ -22,6 +22,7 @@ const Head = () => {
       <meta name="msapplication-config" content="/browserconfig.xml" />
       <meta name="msapplication-TileColor" content="2CE2C2" />
       <meta name="theme-color" content="2CE2C2"></meta>
+      <meta name="viewport" content="width=device-width, initial-scale=1"></meta>
     </>
   );
 };

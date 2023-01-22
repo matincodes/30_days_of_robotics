@@ -17,7 +17,7 @@ const Sidebar = ({
   closeSidebar,
 }: {
   open: boolean;
-  closeSidebar: MouseEventHandler<HTMLDivElement>;
+  closeSidebar: MouseEventHandler<HTMLDivElement | HTMLLIElement>;
 }) => {
   const pathname = usePathname();
   const auth = useAuth();
@@ -49,7 +49,7 @@ const Sidebar = ({
             <Close />
           </div>
           <ul>
-            <li className="border-b border-b-[#D9D9D9]">
+            <li className="border-b border-b-[#D9D9D9]" onClick={closeSidebar}>
               <Link
                 href="/"
                 className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
@@ -60,7 +60,7 @@ const Sidebar = ({
                 <span>Home</span>
               </Link>
             </li>
-            <li className="border-b border-b-[#D9D9D9]">
+            <li className="border-b border-b-[#D9D9D9]" onClick={closeSidebar}>
               <Link
                 href="/leaderboard"
                 className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
@@ -71,7 +71,7 @@ const Sidebar = ({
                 <span>Leaderboard</span>
               </Link>
             </li>
-            <li className="border-b border-b-[#D9D9D9]">
+            <li className="border-b border-b-[#D9D9D9]" onClick={closeSidebar}>
               <Link
                 href="/submissions"
                 className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
@@ -82,7 +82,7 @@ const Sidebar = ({
                 <span>Submissions</span>
               </Link>
             </li>
-            <li className="border-b border-b-[#D9D9D9]">
+            <li className="border-b border-b-[#D9D9D9]" onClick={closeSidebar}>
               <Link
                 href="/tasks"
                 className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
@@ -93,7 +93,7 @@ const Sidebar = ({
                 <span>Tasks</span>
               </Link>
             </li>
-            <li className="border-b border-b-[#D9D9D9]">
+            <li className="border-b border-b-[#D9D9D9]" onClick={closeSidebar}>
               <Link
                 href="/message"
                 className={`p-[10px] pr-5 gap-4 flex items-center text-2xl font-normal hover:text-teal ${
